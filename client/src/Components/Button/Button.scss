@@ -1,0 +1,20 @@
+@import "./assets/styles/_colors.scss";
+
+.c-button {
+    height: 50px;
+    border: none;
+    width: 200px;
+    color: white;
+    border-radius: 5px;
+    background-color: $teal;
+    &:hover {
+        cursor: pointer;
+    }
+    &:focus {
+        outline: none;
+    }
+    &:active {
+        outline: none;
+        background-color: $dark-teal;
+    }
+}
