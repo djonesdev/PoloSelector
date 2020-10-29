@@ -9,16 +9,25 @@ type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchT
 
 function GettingStartedContainer(props: Props) {
 
-  const [date, setDate] = useState("")
+  const [currentStage, setCurrentState] = useState(0)
+  const [numberofCarDoors, setNumberofCarDoors] = useState({ value: '', label: '' })
   const [carSeries, setCarSeries] = useState({ value: '', label: '' })
-  console.log(props.cars, 'filteredCars list')
+
   useEffect(() => {
     props.getAllCars()
   }, [])
 
   const handleSeriesChange = (option: DropdownOption) => {
     setCarSeries(option)
-    props.filterCars(option.value)
+  }
+
+  const handleDoorNumberChange = (option: DropdownOption) => {
+    setNumberofCarDoors(option)
+  }
+
+  const onPressNext = (option: DropdownOption) => {
+    props.filterCars(option.value, ['model', 'series'])
+    setCurrentState(currentStage + 1)
   }
 
 
@@ -27,8 +36,9 @@ function GettingStartedContainer(props: Props) {
       carSeries={carSeries}
       availbleCarOptions={props.cars}
       onChangeDropDown={handleSeriesChange}
-      filterCars={props.filterCars}
-      dateValue={date}
+      onPressNext={onPressNext}
+      currentStage={currentStage}
+      numberofCarDoors={numberofCarDoors}
     />
   )
 
@@ -40,7 +50,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
   getAllCars: () => dispatch(getAllCars()),
-  filterCars: (value: string) => dispatch(filterCars(value))
+  filterCars: (value: string, accessors: string[]) => dispatch(filterCars(value, accessors))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(GettingStartedContainer);

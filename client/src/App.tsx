@@ -9,6 +9,7 @@ import './assets/styles/_colors.scss'
 import { getAllCars } from './redux/actions/actions';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import GettingStarted from './Pages/GettingStarted/GettingStarted.page';
+import Card from './Components/Card/Card';
 
 const App = (props: any) => {
   const [name, setName] = useState("")
@@ -25,12 +26,14 @@ const App = (props: any) => {
 
   return (
     <Router>
-      <div className='u-width-100 u-flex u-flex--justify-center u-flex--align-center u-flex--column'>
-        <p>You have a potential {props.cars.filteredCars.length} matches</p>
-        <Switch>
-          <Route exact path='/' component={LandingPage}></Route>
-          <Route path='/getting-started' component={GettingStarted}></Route>
-        </Switch>
+      <div className='u-flex u-flex--justify-center u-flex--align-center u-flex--column'>
+        <Card className=''>
+          <p>You have a potential {props.cars.filteredCars.length} matches</p>
+          <Switch>
+            <Route exact path='/' component={LandingPage}></Route>
+            <Route path='/getting-started' component={GettingStarted}></Route>
+          </Switch>
+        </Card>
       </div>
     </Router>
   );

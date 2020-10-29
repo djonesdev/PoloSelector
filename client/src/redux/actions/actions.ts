@@ -12,10 +12,15 @@ export const getAllCars = () => async (dispatch: Dispatch): Promise<void> => {
     })
 }
 
-export const filterCars = (value: string) => async (dispatch: Dispatch, getState: Function): Promise<void> => {
+export const filterCars = (value: string, accessors: string[]) => async (dispatch: Dispatch, getState: Function): Promise<void> => {
     const state = getState()
-    const newFilteredState = state.cars.filteredCars.filter((car: any) => car.model.series === value)
-    console.log(newFilteredState, value)
+    let newFilteredState;
+    if (accessors.length > 1) {
+        newFilteredState = state.cars.filteredCars.filter((car: any) => car[accessors[0]][accessors[1]] === value)
+    } else {
+        newFilteredState = state.cars.filteredCars.filter((car: any) => car[accessors[0]] === value)
+    }
+
     dispatch({
         type: FILTER_CARS,
         payload: newFilteredState

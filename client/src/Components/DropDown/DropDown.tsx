@@ -24,7 +24,7 @@ function DropDown({ options, placeholder, onChange, currentValue }: DropDownProp
 
     const animateDropdownIconClass = isOptionsVisible ? 'c-dropdown__select-icon_isOpen' : 'c-dropdown__select-icon'
     return (
-        <div>
+        <div className='u-position--relative'>
             <div className='c-dropdown' onClick={() => setIsOptionsVisible(!isOptionsVisible)}>
                 <p>{currentValue ? currentValue : placeholder}</p>
                 <ExpandMore style={{ color: '#3FBF9D' }} className={animateDropdownIconClass} />
@@ -33,9 +33,7 @@ function DropDown({ options, placeholder, onChange, currentValue }: DropDownProp
                 isOptionsVisible &&
                 <ul className='c-dropdown__list'>
                     {options.map(option => (
-                        <div className='c-dropdown__list-item'>
-                            <li onClick={() => onSelectOption(option)}>{option.label}</li>
-                        </div>
+                        <li className='c-dropdown__list-item' onClick={() => onSelectOption(option)}>{option.label}</li>
                     )
                     )}
                 </ul>
