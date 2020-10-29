@@ -1,0 +1,64 @@
+@import "./assets/styles/_colors.scss";
+
+.c-dropdown {
+    width: 250px;
+    position: relative;
+
+    &__select-icon {
+        position: absolute;
+        right: 10px;
+        top: 1px;
+
+        &_isOpen {
+            @extend .c-dropdown__select-icon;
+            animation: rotation 0.2s linear forwards;
+        }
+    }
+
+    &__list {
+        padding: 0;
+        margin: 0;
+        background: #ffffff;
+        border: 2px solid #e5e5e5;
+        box-sizing: border-box;
+        color: #3faffa;
+        font-size: 1.3rem;
+        font-weight: 500;
+
+        &:first-child {
+            padding-top: 0.8em;
+        }
+    }
+
+    &__list-item {
+        list-style: none;
+        padding-bottom: 0.8em;
+        text-align: center;
+
+        &:hover {
+            background-color: $teal;
+            color: $white;
+        }
+    }
+}
+
+@keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(180deg);
+    }
+}
+
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(180deg);
+    }
+}

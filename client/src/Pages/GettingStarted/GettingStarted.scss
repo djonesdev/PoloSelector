@@ -1,0 +1,39 @@
+.c-getting-started {
+    &__input-container {
+        width: 500px;
+    }
+}
+
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.box select {
+    padding: 12px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+    appearance: none;
+}
+
+
+.box select option {
+    padding: 30px;
+
+    background-color: red;
+
+    &:hover {}
+}
+
+.select-icon {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+}

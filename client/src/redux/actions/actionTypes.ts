@@ -1,4 +1,5 @@
 export const GET_ALL_CARS = 'GET_ALL_CARS'
+export const FILTER_CARS = 'FILTER_CARS'
 
 interface CarDetails {
     manufacturedDate?: string,
@@ -60,6 +61,11 @@ export interface Cars {
 interface GetAllCarsAction {
     type: typeof GET_ALL_CARS
     payload: Cars[]
-  }
+}
 
-  export type CarActionTypes = GetAllCarsAction
+interface FilterCarsAction {
+    type: typeof FILTER_CARS
+    payload: Cars[]
+}
+
+export type CarActionTypes = GetAllCarsAction | FilterCarsAction
