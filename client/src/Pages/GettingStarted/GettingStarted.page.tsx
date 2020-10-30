@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ChangeEvent } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import GettingStarted from './GettingStarted'
@@ -57,8 +57,6 @@ function GettingStartedContainer(props: Props) {
     setSpecificCar({ value: '', label: '' })
     props.getAllCars()
   }
-
-  console.log(props.fact, 'state')
 
   return (
     <GettingStarted

@@ -1,9 +1,7 @@
-import React, { useState, ChangeEvent } from 'react'
-import { AccountCircleRounded, ExpandMore } from '@material-ui/icons'
-import { diff } from 'deep-diff';
+import React from 'react'
+// @ts-ignore
+import ConfettiCanvas from 'react-confetti-burst-canvas'
 
-
-import FormTextInput from '../../Components/FormTextInput/FormTextInput'
 import { FactResponse } from '../../service/carsApi'
 import { Cars } from '../../redux/actions/actionTypes'
 import Button from '../../Components/Button/Button'
@@ -77,6 +75,9 @@ function GettingStarted({
         const carCode = availbleCarOptions[0].model.abiCode
         return (
             <div className='u-flex--centered-column'>
+                <div style={{ height: 250, width: '85%' }}>
+                    <ConfettiCanvas />
+                </div>
                 <h1>Hey look! We found your car in {moveCount} questions!</h1>
                 <div className='u-width-100 u-flex u-flex--justify-center u-flex--align'>
                     <div className='u-flex--centered-column u-flex--one'>
@@ -95,7 +96,6 @@ function GettingStarted({
                 {!!fact && (
                     <div>
                         <h3>Heres a fact related to your cars abi code!</h3>
-                        {/* @ts-ignore */}
                         <p>{fact.text}</p>
                     </div>
                 )}
@@ -176,15 +176,7 @@ function GettingStarted({
                     <Button disabled={!bhp.label} style='primary' text='Enter Search' onClick={() => onPressNext(bhp, ['details', 'bhpCount'])} />
                 </div>
             )}
-            {/* {hasOptions && currentStage === 7 && (
-                <div className='u-flex--centered-column'>
-                    <h1>Hmm, okay you have this many potential matches {availbleCarOptions.length}</h1>
-                    <p>Which model from the list below is your car?</p>
-                    <DropDown currentValue={productionYear.label} placeholder='Car Model' onChange={handleProductionYearChange} options={availbleCarModels} />
-                    <Button disabled={!productionYear.label} style='primary' text='Enter Search' onClick={() => onPressNext(productionYear, ['model', 'yearTo'])} />
-                </div>
-            )} */}
-            {currentStage === 8 && (
+            {currentStage === 7 && (
                 <div className='u-flex--centered-column'>
                     <h1>I think we've found your car! {availbleCarOptions.length}</h1>
                     <p>Given these answers you prodivded, this is the car we have on record</p>
