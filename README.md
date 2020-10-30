@@ -1,21 +1,22 @@
-To run this project you will need to navigate into the api and client directory in seperate tabs
+###To run this project 
+You will need to navigate into the api and client directory in seperate tabs
 ```cd api``` 
 ```cd client```
 
-when inside either you will need to install dependencies using NPM 
+When inside either you will need to install dependencies using NPM 
 ```npm install```
 
 Then run ```npm start``` in both directories
 The server should spin up on localhost:9000
 The client should spin up on localhost:3000 
 
-Tech used: 
+###Tech used: 
 
-Server side: 
+####Server side: 
 Node 
 Express
 
-Client side: 
+####Client side: 
 React
 Hooks
 Redux
