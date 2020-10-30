@@ -1,13 +1,15 @@
-import { GET_ALL_CARS, Cars, FILTER_CARS } from "../actions/actionTypes"
+import { GET_ALL_CARS, Cars, FILTER_CARS, GET_CODE_FACT } from "../actions/actionTypes"
 
 interface InitialCarsState {
   allCars: Cars[]
   filteredCars: Cars[]
+  fact: any
 }
 
 const initialState: InitialCarsState = {
   allCars: [],
-  filteredCars: []
+  filteredCars: [],
+  fact: undefined,
 }
 
 export const carsReducer = (state = initialState, action: any) => {
@@ -22,6 +24,11 @@ export const carsReducer = (state = initialState, action: any) => {
       return {
         ...state,
         filteredCars: action.payload
+      }
+    case GET_CODE_FACT:
+      return {
+        ...state,
+        fact: action.payload
       }
     default:
       return state

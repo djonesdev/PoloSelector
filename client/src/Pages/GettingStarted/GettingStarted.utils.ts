@@ -6,3 +6,12 @@ export const removeDuplicate = (unfilteredArray: any[]) => unfilteredArray.reduc
         return acc;
     }
 }, []);
+
+export function cleanObject(object: any) {
+    for (var propName in object) {
+        if (object[propName] === null || object[propName] === undefined) {
+            delete object[propName];
+        }
+    }
+    return object
+}

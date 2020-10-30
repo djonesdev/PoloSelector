@@ -13,10 +13,10 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   Action<string>
 >
 
-export default function configureStore(initialState={}) {
- return createStore(
-   rootReducer,
-   initialState,
-   applyMiddleware(thunk)
- );
+export default function configureStore(initialState = {}) {
+  return createStore(
+    rootReducer,
+    initialState,
+    applyMiddleware(thunk)
+  );
 }

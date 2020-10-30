@@ -1,6 +1,10 @@
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
 
 import FormTextInput from "./Components/FormTextInput/FormTextInput"
 import './App.scss';
@@ -22,13 +26,10 @@ const App = (props: any) => {
     setName(e.target.value)
   }
 
-  console.log(props)
-
   return (
     <Router>
-      <div className='u-flex u-flex--justify-center u-flex--align-center u-flex--column'>
-        <Card className=''>
-          <p>You have a potential {props.cars.filteredCars.length} matches</p>
+      <div className='u-flex--centered-column'>
+        <Card className='page'>
           <Switch>
             <Route exact path='/' component={LandingPage}></Route>
             <Route path='/getting-started' component={GettingStarted}></Route>

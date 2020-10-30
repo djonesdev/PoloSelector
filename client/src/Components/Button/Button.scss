@@ -7,14 +7,21 @@
     color: white;
     border-radius: 5px;
     background-color: $secondary;
+
     &:hover {
         cursor: pointer;
     }
+
     &:focus {
         outline: none;
     }
+
     &:active {
         outline: none;
         background-color: $dark-teal;
+    }
+
+    &__disabled-true {
+        background-color: $disabled
     }
 }

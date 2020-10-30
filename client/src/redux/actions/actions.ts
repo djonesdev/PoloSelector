@@ -1,8 +1,10 @@
+
 import { ThunkAction } from 'redux-thunk'
 import { Dispatch } from 'redux';
+import moment from 'moment'
 
 import CarsApi from '../../service/carsApi'
-import { GET_ALL_CARS, CarActionTypes, FILTER_CARS } from './actionTypes'
+import { GET_ALL_CARS, GET_CODE_FACT, CarActionTypes, FILTER_CARS } from './actionTypes'
 
 export const getAllCars = () => async (dispatch: Dispatch): Promise<void> => {
     const carsResults = await CarsApi.getAllCars()
@@ -24,5 +26,15 @@ export const filterCars = (value: string, accessors: string[]) => async (dispatc
     dispatch({
         type: FILTER_CARS,
         payload: newFilteredState
+    })
+}
+
+
+export const getCodeFact = (code: string) => async (dispatch: Dispatch): Promise<void> => {
+    const factResponse = await CarsApi.getCodeFact(code)
+    console.log(factResponse, 'response')
+    dispatch({
+        type: GET_CODE_FACT,
+        payload: factResponse
     })
 }

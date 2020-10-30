@@ -1,6 +1,17 @@
 .u-flex {
     display: flex;
 
+    &--one {
+        flex: 1;
+    }
+
+    &--centered-column {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
     &--justify-center {
         justify-content: center;
     }
