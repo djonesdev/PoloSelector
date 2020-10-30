@@ -1,4 +1,5 @@
-###To run this project 
+To run this project 
+===================
 You will need to navigate into the api and client directory in seperate tabs
 ```cd api``` 
 ```cd client```
@@ -10,18 +11,24 @@ Then run ```npm start``` in both directories
 The server should spin up on localhost:9000
 The client should spin up on localhost:3000 
 
-###Tech used: 
+Tech used: 
+----------
 
-####Server side: 
+Server side: 
+----------
 Node 
 Express
 
-####Client side: 
+Client side: 
+----------
 React
 Hooks
 Redux
 Redux-Thunk
 React-Router-Dom
+
+Notes: 
+----------
 
 While i think redux and it's middleware is heavy handed for a project this size i thought it would be a good idea to show it as if i was planning to scale to a production application
 
