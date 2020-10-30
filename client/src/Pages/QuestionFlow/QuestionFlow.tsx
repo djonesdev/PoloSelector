@@ -1,13 +1,14 @@
 import React from 'react'
 // @ts-ignore
 import ConfettiCanvas from 'react-confetti-burst-canvas'
+import { DriveEta, AirportShuttle, DateRange, LocalGasStation, Settings, PowerInput } from '@material-ui/icons'
 
 import { FactResponse } from '../../service/carsApi'
 import { Cars } from '../../redux/actions/actionTypes'
 import Button from '../../Components/Button/Button'
-import './GettingStarted.scss'
+import './QuestionFlow.scss'
 import DropDown, { DropdownOption } from '../../Components/DropDown/DropDown'
-import { cleanObject, removeDuplicate } from './GettingStarted.utils'
+import { cleanObject, removeDuplicate } from './QuestionFlow.utils'
 
 interface StartedProps {
     moveCount: number
@@ -35,7 +36,7 @@ interface StartedProps {
     getCodeFact: (code: string) => void
 }
 
-function GettingStarted({
+function QuestionFlow({
     getCodeFact,
     onPressNext,
     reset,
@@ -60,12 +61,32 @@ function GettingStarted({
     moveCount,
     fact
 }: StartedProps) {
+    const getFuelTypeLabel = (fuelType: string) => {
+        switch (fuelType) {
+            case 'P':
+                return 'Petrol'
+            case 'D':
+                return 'Diesel'
+            default:
+                return 'Petrol'
+        }
+    }
+    const getTransmissionLabel = (tranmission: string) => {
+        switch (tranmission) {
+            case 'M':
+                return 'Manual'
+            case 'A':
+                return 'Automatic'
+            default:
+                return 'Manual'
+        }
+    }
     const hasOptions = !!availbleCarOptions.length
     const availbleCarSeries = removeDuplicate(availbleCarOptions.map(car => ({ value: car.model.series, label: `Series ${car.model.series}` })))
     const availbleCarModels = removeDuplicate(availbleCarOptions.map(car => ({ value: car.model.model, label: `${car.model.model}` })))
     const availbleCarDoors = removeDuplicate(availbleCarOptions.map(car => ({ value: car.model.doorCount, label: `Num. of Doors: ${car.model.doorCount}` })))
-    const availableTransmissions = removeDuplicate(availbleCarOptions.map(car => ({ value: car.model.transmission, label: `${car.model.transmission}` })))
-    const availableFuelTypes = removeDuplicate(availbleCarOptions.map(car => ({ value: car.model.fuelType, label: `${car.model.fuelType}` })))
+    const availableTransmissions = removeDuplicate(availbleCarOptions.map(car => ({ value: car.model.transmission, label: `${getTransmissionLabel(car.model.transmission)}` })))
+    const availableFuelTypes = removeDuplicate(availbleCarOptions.map(car => ({ value: car.model.fuelType, label: `${getFuelTypeLabel(car.model.fuelType)}` })))
     const availableBodyDescriptions = removeDuplicate(availbleCarOptions.map(car => ({ value: car.details.bodyDesc, label: `${car.details.bodyDesc}` })))
     const availableProductionYears = removeDuplicate(availbleCarOptions.map(car => ({ value: car.model.yearTo, label: `${car.model.yearFrom} ${car.model.yearTo && ' - ' + car.model.yearTo}` })))
     const availbleBhp = removeDuplicate(availbleCarOptions.map(car => ({ value: car.details.bhpCount, label: `BHP: ${car.details.bhpCount}` })))
@@ -89,16 +110,16 @@ function GettingStarted({
                         {Object.entries(cleanObject({ ...availbleCarOptions[0].model })).map(([key, value]) => <p key={key}><b>{key}: </b>{value}</p>)}
                     </div>
                 </div>
-                <div className='u-flex'>
-                    <Button style='primary' text='Get Fact' onClick={() => getCodeFact(carCode.substring(0, 3))} />
-                    <Button style='primary' text='Start Again' onClick={() => reset()} />
-                </div>
                 {!!fact && (
                     <div>
                         <h3>Heres a fact related to your cars abi code!</h3>
                         <p>{fact.text}</p>
                     </div>
                 )}
+                <div className='u-flex'>
+                    <Button className='c-getting-started__final-button' style='primary' text='Get Fact' onClick={() => getCodeFact(carCode.substring(0, 3))} />
+                    <Button className='c-getting-started__final-button' style='primary' text='Start Again' onClick={() => reset()} />
+                </div>
             </div>
         )
     }
@@ -108,7 +129,7 @@ function GettingStarted({
             <div className='u-flex--centered-column'>
                 <h1>Hmm,dsad okay you have this many potential matches {availbleCarOptions.length}</h1>
                 <p>Which model from the list below is your car?</p>
-                <DropDown currentValue={specificCar.label} placeholder='Car Model' onChange={handleSpecificCarChange} options={availbleCarModels} />
+                <DropDown LeadIcon={DriveEta} currentValue={specificCar.label} placeholder='Car Model' onChange={handleSpecificCarChange} options={availbleCarModels} />
                 <Button disabled={!specificCar.label} style='primary' text='Enter Search' onClick={() => onPressNext(specificCar, ['model', 'model'])} />
             </div>
         )
@@ -121,7 +142,7 @@ function GettingStarted({
                     <h1>Lets get started!</h1>
                     <p>Enter Your Cars Series Below</p>
                     <div>
-                        <DropDown currentValue={carSeries.label} placeholder='Car Series' onChange={onChangeDropDown} options={availbleCarSeries} />
+                        <DropDown LeadIcon={DriveEta} currentValue={carSeries.label} placeholder='Car Series' onChange={onChangeDropDown} options={availbleCarSeries} />
                     </div>
                     <Button disabled={!carSeries.label} style='primary' text='Enter Search' onClick={() => onPressNext(carSeries, ['model', 'series'])} />
                 </div>
@@ -131,7 +152,7 @@ function GettingStarted({
                     <h1>Hmm, okay you have this many potential matches {availbleCarOptions.length}</h1>
                     <p>How many doors does your car have?</p>
                     <div>
-                        <DropDown currentValue={numberofCarDoors.label} placeholder='Number of Doors' onChange={handleDoorNumberChange} options={availbleCarDoors} />
+                        <DropDown LeadIcon={AirportShuttle} currentValue={numberofCarDoors.label} placeholder='Number of Doors' onChange={handleDoorNumberChange} options={availbleCarDoors} />
                     </div>
                     <Button disabled={!numberofCarDoors.label} style='primary' text='Enter Search' onClick={() => onPressNext(numberofCarDoors, ['model', 'doorCount'])} />
                 </div>
@@ -140,7 +161,7 @@ function GettingStarted({
                 <div className='u-flex--centered-column'>
                     <h1>Hmm, okay you have this many potential matches {availbleCarOptions.length}</h1>
                     <p>What years were your car produced?</p>
-                    <DropDown currentValue={productionYear.label} placeholder='Years of Production' onChange={handleProductionYearChange} options={availableProductionYears} />
+                    <DropDown LeadIcon={DateRange} currentValue={productionYear.label} placeholder='Years of Production' onChange={handleProductionYearChange} options={availableProductionYears} />
                     <Button disabled={!productionYear.label} style='primary' text='Enter Search' onClick={() => onPressNext(productionYear, ['model', 'yearTo'])} />
                 </div>
             )}
@@ -148,7 +169,7 @@ function GettingStarted({
                 <div className='u-flex--centered-column'>
                     <h1>Hmm, okay you have this many potential matches {availbleCarOptions.length}</h1>
                     <p>What type of fuel does your car take?</p>
-                    <DropDown currentValue={fuelType.label} placeholder='Type of Fuel' onChange={handleFuelTypeChange} options={availableFuelTypes} />
+                    <DropDown LeadIcon={LocalGasStation} currentValue={fuelType.label} placeholder='Type of Fuel' onChange={handleFuelTypeChange} options={availableFuelTypes} />
                     <Button disabled={!fuelType.label} style='primary' text='Enter Search' onClick={() => onPressNext(fuelType, ['model', 'fuelType'])} />
                 </div>
             )}
@@ -156,7 +177,7 @@ function GettingStarted({
                 <div className='u-flex--centered-column'>
                     <h1>Hmm, okay you have this many potential matches {availbleCarOptions.length}</h1>
                     <p>Which of these best describes your car?</p>
-                    <DropDown currentValue={bodyDesc.label} placeholder='Best Description' onChange={handleBodyDescChange} options={availableBodyDescriptions} />
+                    <DropDown LeadIcon={DriveEta} currentValue={bodyDesc.label} placeholder='Best Description' onChange={handleBodyDescChange} options={availableBodyDescriptions} />
                     <Button disabled={!bodyDesc.label} style='primary' text='Enter Search' onClick={() => onPressNext(bodyDesc, ['details', 'bodyDesc'])} />
                 </div>
             )}
@@ -164,7 +185,7 @@ function GettingStarted({
                 <div className='u-flex--centered-column'>
                     <h1>Hmm, okay you have this many potential matches {availbleCarOptions.length}</h1>
                     <p>What type of transmission is your car?</p>
-                    <DropDown currentValue={transmission.label} placeholder='Type of Transmission' onChange={handleTransmissionChange} options={availableTransmissions} />
+                    <DropDown LeadIcon={Settings} currentValue={transmission.label} placeholder='Type of Transmission' onChange={handleTransmissionChange} options={availableTransmissions} />
                     <Button disabled={!transmission.label} style='primary' text='Enter Search' onClick={() => onPressNext(transmission, ['model', 'transmission'])} />
                 </div>
             )}
@@ -172,20 +193,12 @@ function GettingStarted({
                 <div className='u-flex--centered-column'>
                     <h1>Hmm, okay you have this many potential matches {availbleCarOptions.length}</h1>
                     <p>How much BHP (Brake Horse Power) does your car have?</p>
-                    <DropDown currentValue={bhp.label} placeholder='BHP (Brake Horse Power)' onChange={handleBhpChange} options={availbleBhp} />
+                    <DropDown LeadIcon={PowerInput} currentValue={bhp.label} placeholder='BHP (Brake Horse Power)' onChange={handleBhpChange} options={availbleBhp} />
                     <Button disabled={!bhp.label} style='primary' text='Enter Search' onClick={() => onPressNext(bhp, ['details', 'bhpCount'])} />
-                </div>
-            )}
-            {currentStage === 7 && (
-                <div className='u-flex--centered-column'>
-                    <h1>I think we've found your car! {availbleCarOptions.length}</h1>
-                    <p>Given these answers you prodivded, this is the car we have on record</p>
-                    <DropDown currentValue={productionYear.label} placeholder='Car Model' onChange={handleProductionYearChange} options={availbleCarModels} />
-                    <Button disabled={!productionYear.label} style='primary' text='Enter Search' onClick={() => onPressNext(productionYear, ['model', 'yearTo'])} />
                 </div>
             )}
         </div>
     )
 }
 
-export default GettingStarted
+export default QuestionFlow

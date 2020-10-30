@@ -1,10 +1,6 @@
-import React, { useState, ChangeEvent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
 
 import FormTextInput from "./Components/FormTextInput/FormTextInput"
 import './App.scss';
@@ -12,19 +8,14 @@ import './assets/styles/_display.scss'
 import './assets/styles/_colors.scss'
 import { getAllCars } from './redux/actions/actions';
 import LandingPage from './Pages/LandingPage/LandingPage';
-import GettingStarted from './Pages/GettingStarted/GettingStarted.page';
+import QuestionFlow from './Pages/QuestionFlow/QuestionFlow.page';
 import Card from './Components/Card/Card';
 
 const App = (props: any) => {
-  const [name, setName] = useState("")
 
   useEffect(() => {
     props.getAllCars()
   }, [])
-
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value)
-  }
 
   return (
     <Router>
@@ -32,7 +23,7 @@ const App = (props: any) => {
         <Card className='page'>
           <Switch>
             <Route exact path='/' component={LandingPage}></Route>
-            <Route path='/getting-started' component={GettingStarted}></Route>
+            <Route path='/getting-started' component={QuestionFlow}></Route>
           </Switch>
         </Card>
       </div>

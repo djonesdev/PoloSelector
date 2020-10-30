@@ -3,6 +3,10 @@
         width: 500px;
     }
 
+    &__final-button {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
 
 .box {
@@ -22,15 +26,6 @@
     appearance: button;
     outline: none;
     appearance: none;
-}
-
-
-.box select option {
-    padding: 30px;
-
-    background-color: red;
-
-    &:hover {}
 }
 
 .select-icon {

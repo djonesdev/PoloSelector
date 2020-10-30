@@ -6,11 +6,12 @@ interface ButtonProps {
     onClick: () => void
     style: string
     disabled?: boolean
+    className?: string
 }
-function Button({ text, onClick, style, disabled }: ButtonProps) {
+function Button({ className, text, onClick, disabled }: ButtonProps) {
     return (
         <div>
-            <button disabled={disabled} className={`c-button c-button__disabled-${disabled}`} onClick={onClick}>{text}</button>
+            <button disabled={disabled} className={`c-button c-button__disabled-${disabled} ${className}`} onClick={onClick}>{text}</button>
         </div>
     )
 }

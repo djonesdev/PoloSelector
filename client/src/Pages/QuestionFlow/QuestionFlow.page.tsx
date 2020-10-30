@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
-import GettingStarted from './GettingStarted'
+import QuestionFlow from './QuestionFlow'
 import { getAllCars, filterCars, getCodeFact } from '../../redux/actions/actions'
 import { DropdownOption } from '../../Components/DropDown/DropDown'
 
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
 
-function GettingStartedContainer(props: Props) {
+function QuestionFlowContainer(props: Props) {
 
   const [currentStage, setCurrentState] = useState(0)
   const [moveCount, setMoveCount] = useState(0)
@@ -59,7 +59,7 @@ function GettingStartedContainer(props: Props) {
   }
 
   return (
-    <GettingStarted
+    <QuestionFlow
       reset={reset}
       fact={props.fact}
       carSeries={carSeries}
@@ -98,4 +98,4 @@ const mapDispatchToProps = (dispatch: any) => ({
   filterCars: (value: string, accessors: string[]) => dispatch(filterCars(value, accessors))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(GettingStartedContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionFlowContainer);

@@ -1,4 +1,5 @@
 import { ExpandMore } from '@material-ui/icons'
+import { SvgIconProps } from '@material-ui/core';
 import React, { useState } from 'react'
 import './DropDown.scss'
 
@@ -12,9 +13,10 @@ interface DropDownProps {
     placeholder: string
     onChange: (value: DropdownOption) => void
     currentValue: string
+    LeadIcon?: (props: SvgIconProps) => JSX.Element;
 }
 
-function DropDown({ options, placeholder, onChange, currentValue }: DropDownProps) {
+function DropDown({ LeadIcon, options, placeholder, onChange, currentValue }: DropDownProps) {
     const [isOptionsVisible, setIsOptionsVisible] = useState(false)
 
     const onSelectOption = (value: DropdownOption) => {
@@ -26,6 +28,7 @@ function DropDown({ options, placeholder, onChange, currentValue }: DropDownProp
     return (
         <div className='u-position--relative'>
             <div className='c-dropdown' onClick={() => setIsOptionsVisible(!isOptionsVisible)}>
+                {LeadIcon && <LeadIcon style={{ color: '#3FBF9D' }} className='c-dropdown__icon' />}
                 <p>{currentValue ? currentValue : placeholder}</p>
                 <ExpandMore style={{ color: '#3FBF9D' }} className={animateDropdownIconClass} />
             </div>
