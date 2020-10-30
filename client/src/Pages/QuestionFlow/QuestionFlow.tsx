@@ -117,8 +117,8 @@ function QuestionFlow({
                     </div>
                 )}
                 <div className='u-flex'>
-                    <Button className='c-getting-started__final-button' style='primary' text='Get Fact' onClick={() => getCodeFact(carCode.substring(0, 3))} />
-                    <Button className='c-getting-started__final-button' style='primary' text='Start Again' onClick={() => reset()} />
+                    <Button className='c-questions__final-button' style='primary' text='Get Fact' onClick={() => getCodeFact(carCode.substring(0, 3))} />
+                    <Button className='c-questions__final-button' style='primary' text='Start Again' onClick={() => reset()} />
                 </div>
             </div>
         )
